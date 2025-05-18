@@ -16,10 +16,12 @@ const userMiddleware = (req, res, next) => {
     }
     const decoded = jsonwebtoken_1.default.verify(token, config_1.JWT_KEY);
     //@ts-ignore
-    console.log(decoded, decoded._id);
+    console.log(decoded);
     if (decoded) {
         //@ts-ignore
-        req.id = decoded._id;
+        req.id = decoded.id;
+        //@ts-ignore
+        console.log(req.id);
         next();
     }
 };

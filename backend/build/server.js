@@ -34,21 +34,19 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-mongoose_1.default.connect("mongodb+srv://shivresides:XYWrWNrSyWnfM4q2@second-brain.4jq3gmh.mongodb.net/todo-app").then(() => console.log("connected to db"));
+mongoose_1.default.connect("mongodb+srv://shivresides:TjLuNHyDlELlttOM@second-brain.4jq3gmh.mongodb.net/todo-app").then(() => console.log("connected to db"));
 const userSchema = new mongoose_1.Schema({
     username: String,
     password: String
 });
+//db pass - TjLuNHyDlELlttOM
 const todoSchema = new mongoose_1.Schema({
     title: String,
-    id: mongoose_1.default.Types.ObjectId,
     description: String,
-    done: Boolean
+    done: Boolean,
+    userId: { type: mongoose_1.default.Types.ObjectId, ref: 'UserTable', required: true }
 });
 const userModel = mongoose_1.default.model("UserTable", userSchema);
 const todoModel = mongoose_1.default.model("TodoTable", todoSchema);
-const models = {
-    userModel,
-    todoModel
-};
+const models = { userModel, todoModel };
 exports.default = models;

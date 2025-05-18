@@ -3,12 +3,14 @@ import models from "../server";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import { JWT_KEY } from "../config";
+import {z} from "zod"
 
 
 
 const userRouter = express.Router();
 
 userRouter.post("/signup", async (req, res)=>{
+    
    const username = req.body.username;
    const password = req.body.password;
 

@@ -22,20 +22,58 @@ router.post("/add", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     const todo = yield server_1.default.todoModel.create({
         title,
         description,
-        done
+        done,
+        //@ts-ignore
+        userId: req.id
     });
     res.json({
         message: "todo added"
     });
 }));
-router.get("/preview", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/todos", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     //@ts-ignore
     const userid = req.id;
-    const todo = yield server_1.default.todoModel.findOne({
-        userid
+    console.log(userid);
+    const todo = yield server_1.default.todoModel.find({
+        userId: userid
     });
+    console.log(todo);
     res.json({
         todo
     });
+}));
+router.delete("/todos/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("reached here");
+    try {
+        const { id } = req.params;
+        console.log({ id });
+        yield server_1.default.todoModel.findByIdAndDelete(id);
+        res.json({
+            message: 'req delted'
+        });
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: "error deleting content"
+        });
+    }
+}));
+router.put("/todos/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("reached");
+    try {
+        const { id } = req.params;
+        const updated = req.body;
+        yield server_1.default.todoModel.findByIdAndUpdate(id, updated, { new: true });
+        res.status(200).json({
+            message: "updated succesfully"
+        });
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: "error updating"
+        });
+    }
 }));
 exports.default = router;
