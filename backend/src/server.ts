@@ -8,8 +8,6 @@ const userSchema = new Schema({
 //db pass - TjLuNHyDlELlttOM
 const todoSchema = new Schema({
     title : String,
-    description : String,
-    done : Boolean,
     userId: { type: mongoose.Types.ObjectId, ref: 'UserTable', required: true }
 })
 

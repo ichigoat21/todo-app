@@ -3,7 +3,6 @@ import models from "../server";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import { JWT_KEY } from "../config";
-import {z} from "zod"
 
 
 

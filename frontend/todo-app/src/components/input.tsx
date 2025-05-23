@@ -1,10 +1,19 @@
 interface InputProps {
-    placeholder : string,
-    reference : any,
+    value: string;
     onchange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    value : string
+    reference?: React.RefObject<HTMLInputElement>;
+    placeholder?: string;
+    className?: string; 
 }
 
-export const InputBox = (props : InputProps) =>{
-   return <input value={props.value} onChange={props.onchange} className="block w-80 rounded-md py-2 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800" type="text" placeholder={props.placeholder} ref = {props.reference} />
-}
+export const InputBox = (props: InputProps) => {
+    return (
+        <input
+            ref={props.reference}
+            value={props.value}
+            onChange={props.onchange}
+            placeholder={props.placeholder}
+            className={props.className || "w-full px-4 py-3 border-2 border-gray-300 rounded-md focus:border-[#5409DA] focus:outline-none focus:ring-2 focus:ring-[#5409DA]/20 transition-all duration-200"}
+        />
+    );
+};

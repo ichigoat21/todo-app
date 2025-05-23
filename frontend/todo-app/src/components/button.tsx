@@ -1,9 +1,16 @@
 interface ButtonProps {
-    text : string,
-    onclick? : () => void,
+    text: string;
+    onclick?: () => void;
+    className?: string; 
 }
 
-
-export const Button = (props : ButtonProps) => {
-    return <div onClick={props.onclick} className="flex items-center justify-center cursor-pointer p-4 max-w-28 rounded-md border outline-none bg-[#5409DA] text-white font-sans">{props.text}</div>
-}
+export const Button = (props: ButtonProps) => {
+    return (
+        <button 
+            onClick={props.onclick} 
+            className={props.className || "flex items-center justify-center cursor-pointer p-4 rounded-md border outline-none bg-[#5409DA] hover:bg-[#4408c4] text-white font-sans transition-colors duration-200"}
+        >
+            {props.text}
+        </button>
+    );
+};
